@@ -9,6 +9,6 @@ import java.util.Optional;
 
 @Transactional(readOnly = true)
 @Repository
-public interface UserRepository extends JpaRepository<Customer, Long> {
+public interface CustomerRepository extends JpaRepository<Customer, Long> {
     Optional<Customer> findByEmail(String email);
 }
