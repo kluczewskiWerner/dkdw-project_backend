@@ -17,3 +17,6 @@ jobs:
           heroku_app_name: "dkdw-project-backend" #Must be unique in Heroku
           heroku_email: "notedeagle@gmail.com"
           usedocker: true
+          branch: HEAD
+          useforce: false
+          dynamicFiles: false
