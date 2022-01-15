@@ -16,9 +16,8 @@ import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import pl.kluczewski.currency_converter.service.UserService;
+import pl.kluczewski.currency_converter.service.CustomerService;
 
-import javax.sql.DataSource;
 import java.util.Collections;
 
 @Configuration
@@ -29,14 +28,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final RestAuthenticationSuccessHandler successHandler;
     private final RestAuthenticationFailureHandler failureHandler;
     private final String secret;
-    private final UserService userService;
+    private final CustomerService userService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public SecurityConfig(ObjectMapper objectMapper,
                           RestAuthenticationSuccessHandler successHandler,
                           RestAuthenticationFailureHandler failureHandler,
                           @Value("${jwt.secret}") String secret,
-                          UserService userService, BCryptPasswordEncoder bCryptPasswordEncoder) {
+                          CustomerService userService, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.objectMapper = objectMapper;
         this.successHandler = successHandler;
         this.failureHandler = failureHandler;

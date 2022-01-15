@@ -6,28 +6,28 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import pl.kluczewski.currency_converter.model.UserDto;
+import pl.kluczewski.currency_converter.model.CustomerDto;
 import pl.kluczewski.currency_converter.model.entity.Customer;
-import pl.kluczewski.currency_converter.repository.UserRepository;
+import pl.kluczewski.currency_converter.repository.CustomerRepository;
 import org.modelmapper.ModelMapper;
 
 @Service
 @AllArgsConstructor
-public class UserService implements UserDetailsService {
+public class CustomerService implements UserDetailsService {
 
     private final static String USER_NOT_FOUND_MSG = "User with email %s not found";
-    private final UserRepository userRepository;
+    private final CustomerRepository customerRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ModelMapper mapper;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return userRepository.findByEmail(email).orElseThrow(() ->
+        return customerRepository.findByEmail(email).orElseThrow(() ->
                 new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG, email)));
     }
 
     public void singUpUser(Customer user) {
-        boolean userExist = userRepository.findByEmail(user.getUsername())
+        boolean userExist = customerRepository.findByEmail(user.getUsername())
                 .isPresent();
 
         if(userExist) {
@@ -39,24 +39,25 @@ public class UserService implements UserDetailsService {
 
         user.setPassword(encodedPassWord);
 
-        userRepository.save(user);
+        customerRepository.save(user);
 
         //TODO: send confirmation token
     }
 
-    public Customer findById(Long id) {
-        return userRepository.findById(id).orElseThrow();
+    public Customer findByEmail(String email) {
+        return customerRepository.findByEmail(email).orElseThrow();
     }
 
-    public UserDto update(Long id, Customer user) {
-        Customer userToUpdate = findById(id);
+    public CustomerDto update(String email, Customer user) {
+        Customer userToUpdate = findByEmail(email);
         userToUpdate.setFirstName(user.getFirstName());
         userToUpdate.setLastName(user.getLastName());
-        return mapper.map(userToUpdate, UserDto.class);
+        return mapper.map(customerRepository.save(userToUpdate), CustomerDto.class);
     }
 
-    public void deleteById(Long id) {
-        if (userRepository.existsById(id))
-            userRepository.deleteById(id);
+    public void deleteByEmail(String email) {
+        Long id = customerRepository.findByEmail(email).orElseThrow().getId();
+        if (customerRepository.existsById(id))
+            customerRepository.deleteById(id);
     }
 }

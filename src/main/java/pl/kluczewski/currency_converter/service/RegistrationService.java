@@ -11,7 +11,7 @@ import pl.kluczewski.currency_converter.validator.EmailValidator;
 @AllArgsConstructor
 public class RegistrationService {
 
-    private final UserService userService;
+    private final CustomerService userService;
     private final EmailValidator emailValidator;
 
     public void register(RegistrationCredentials request) {
