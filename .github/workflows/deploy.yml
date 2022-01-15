@@ -10,13 +10,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "dkdw-project-backend" #Must be unique in Heroku
-          heroku_email: "notedeagle@gmail.com"
-          usedocker: true
-          branch: HEAD
-          useforce: false
-          dynamicFiles: false
+    - uses: actions/checkout@v2
+    - uses: akhileshns/heroku-deploy@v3.6.8 # This is the action
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: "dkdw-project-backend"
+        heroku_email: "notedeagle@gmail.com"
+        justlogin: true
+    - run: |
+            heroku container:login
+            heroku container:push web --app dkdw-project-backend
+            heroku container:release web --app dkdw-project-backend
