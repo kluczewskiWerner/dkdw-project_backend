@@ -22,7 +22,7 @@ class LoginControllerTest {
     private MockMvc mvc;
 
     public void prepareUser() throws Exception {
-        mvc.perform(post("/register").content("{\"email\": \"test@test.com\", \"password\": \"test\"}")
+        mvc.perform(post("/register").content("{\"email\": \"testahsdgajkdsbh@test.com\", \"password\": \"test\"}")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().is(200))
@@ -34,7 +34,7 @@ class LoginControllerTest {
         prepareUser();
 
         MvcResult login = mvc.perform(post("/login")
-                        .content("{\"email\": \"test@test.com\", \"password\": \"test\"}"))
+                        .content("{\"email\": \"testahsdgajkdsbh@test.com\", \"password\": \"test\"}"))
                 .andDo(print())
                 .andExpect(status().is(200))
                 .andReturn();
