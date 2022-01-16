@@ -3,7 +3,6 @@ package pl.kluczewski.currency_converter.controller;
 import org.springframework.web.bind.annotation.*;
 import pl.kluczewski.currency_converter.config.LoginCredentials;
 
-@CrossOrigin
 @RestController
 public class LoginController {
 

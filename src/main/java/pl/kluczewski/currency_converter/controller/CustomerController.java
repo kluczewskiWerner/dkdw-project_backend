@@ -11,7 +11,6 @@ import pl.kluczewski.currency_converter.service.CustomerService;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user")
-@CrossOrigin
 public class CustomerController {
 
     private final CustomerService customerService;
@@ -23,14 +22,14 @@ public class CustomerController {
         return mapper.map(customerService.findByEmail(email), CustomerDto.class);
     }
 
-    @PutMapping()
+    @PutMapping
     public CustomerDto updateUser(@RequestBody CustomerDto user) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         CustomerDto userUpdated = customerService.update(email, mapper.map(user, Customer.class));
         return customerService.update(email, mapper.map(userUpdated, Customer.class));
     }
 
-    @DeleteMapping()
+    @DeleteMapping( "/delete")
     public void deleteUser() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
         customerService.deleteByEmail(email);
