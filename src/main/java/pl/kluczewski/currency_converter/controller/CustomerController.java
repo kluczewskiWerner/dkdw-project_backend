@@ -8,7 +8,6 @@ import pl.kluczewski.currency_converter.model.CustomerDto;
 import pl.kluczewski.currency_converter.model.entity.Customer;
 import pl.kluczewski.currency_converter.service.CustomerService;
 
-@CrossOrigin
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user")
