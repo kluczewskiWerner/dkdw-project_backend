@@ -1,10 +1,9 @@
 name: Deploy to Heroku
 
 on:
-  workflow_run:
-    workflows: ["Java CI with Maven"]
-    types:
-      - completed
+  push:
+    branches:
+      - master
 
 jobs:
   build:
