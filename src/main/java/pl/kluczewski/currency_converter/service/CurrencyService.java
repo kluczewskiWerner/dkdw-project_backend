@@ -29,7 +29,7 @@ public class CurrencyService {
     }
 
     public CurrencyDto getValueToPln(String currency, BigDecimal quantity) {
-        return currencyClient.getValueFromPln(currency, quantity);
+        return currencyClient.getValueToPln(currency, quantity);
     }
 
     public CurrencyDto getValueToPln(String currency, BigDecimal quantity, String date) {
