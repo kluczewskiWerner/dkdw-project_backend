@@ -14,19 +14,25 @@ import pl.kluczewski.currency_converter.service.CustomerService;
 @RequestMapping("/user")
 public class CustomerController {
 
-    private final CustomerService userService;
+    private final CustomerService customerService;
     private final ModelMapper mapper;
+
+    @GetMapping
+    public CustomerDto getCustomerData() {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        return mapper.map(customerService.findByEmail(email), CustomerDto.class);
+    }
 
     @PutMapping()
     public CustomerDto updateUser(@RequestBody CustomerDto user) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
-        CustomerDto userUpdated = userService.update(email, mapper.map(user, Customer.class));
-        return userService.update(email, mapper.map(userUpdated, Customer.class));
+        CustomerDto userUpdated = customerService.update(email, mapper.map(user, Customer.class));
+        return customerService.update(email, mapper.map(userUpdated, Customer.class));
     }
 
     @DeleteMapping()
     public void deleteUser() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
-        userService.deleteByEmail(email);
+        customerService.deleteByEmail(email);
     }
 }
