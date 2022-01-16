@@ -59,14 +59,4 @@ public class Config {
     public ModelMapper modelMapper() {
         return new ModelMapper();
     }
-
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/user/**").allowedOrigins("*").allowedMethods("GET", "POST","PUT", "DELETE");
-            }
-        };
-    }
 }
