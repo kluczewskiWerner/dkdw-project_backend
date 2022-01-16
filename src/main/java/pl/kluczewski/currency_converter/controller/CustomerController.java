@@ -11,6 +11,7 @@ import pl.kluczewski.currency_converter.service.CustomerService;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user")
+@CrossOrigin
 public class CustomerController {
 
     private final CustomerService customerService;
